@@ -1,0 +1,23 @@
+import sys
+from collections import deque
+input = sys.stdin.readline
+MAX = 10**5
+
+N,M = map(int,input().split())
+ground = [0]*(MAX+1)
+queue = deque()
+queue.append(N)
+
+
+while queue:
+    x= queue.popleft()
+    if x==M :
+        print(ground[x])
+        break
+    for i in (x*2,x-1,x+1):
+        if 0<=i<=MAX and not ground[i] :
+            if i == x*2 :
+                ground[i] = ground[x]
+            else:
+                ground[i] = ground[x]+1
+            queue.append(i)
