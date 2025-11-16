@@ -10,19 +10,19 @@ queue = deque()
 for i in range(N):
     for j in range(M):
         if board[i][j]==2:
-            start_x,start_y = i,j
+            start_x,start_y = j,i
 
-queue.append((start_x,start_y,0))
-visited[start_x][start_y]=True
+queue.append((start_y,start_x,0))
+visited[start_y][start_x]=True
 
 while queue:
-    x,y,cnt = queue.popleft()
-    board[x][y] = cnt
+    y,x,cnt = queue.popleft()
+    board[y][x] = cnt
     for i,j in move:
         nx,ny = x+i,y+j  
-        if 0<=nx<N and 0<=ny<M and board[nx][ny]==1 and not visited[nx][ny]:
-            visited[nx][ny] = True
-            queue.append((nx,ny,cnt+1))
+        if 0<=nx<M and 0<=ny<N and board[ny][nx]==1 and not visited[ny][nx]:
+            visited[ny][nx] = True
+            queue.append((ny,nx,cnt+1))
 
 for i in range(N):
     for j in range(M):
