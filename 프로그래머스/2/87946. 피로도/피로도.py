@@ -1,15 +1,20 @@
-from itertools import permutations
+num = answer = 0
+visited =[]
+
+def search(cnt,k,dungeons):
+    global answer 
+    answer = max(cnt,answer)
+    
+    for i in range(num):
+        if k >=dungeons[i][0] and not visited[i]:
+            visited[i] = True
+            search(cnt+1,k-dungeons[i][1],dungeons)
+            visited[i] = False
+    
+
 def solution(k, dungeons):
-    maximum=-1
-    possible = list(permutations(dungeons, len(dungeons)))
-    save = k
-    while possible:
-        cand = possible.pop()
-        count=0
-        k =save
-        for pair in cand:
-            if k >= pair[0] and k>=pair[1]:
-                k-=pair[1]
-                count+=1
-        maximum = max(count,maximum)
-    return maximum
+    global num,visited
+    num = len(dungeons)
+    visited = [False]*num
+    search(0,k,dungeons)
+    return answer
