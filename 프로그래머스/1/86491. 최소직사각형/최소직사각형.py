@@ -4,12 +4,16 @@ def solution(sizes):
     
     #가로 : 큰 애들 중에 가장 큰 애
     #세로 : 작은 애들 중에 가장 큰 애
-    max_w = -1
-    max_h = -1
+    max_len =-1
+    max_wid =-1
     
-    for pair in sizes:
-        w ,h = max(pair) , min(pair)
-        max_w = max(max_w,w)
-        max_h = max(max_h,h)
+    for size in sizes:
+        width = max(size)
+        length = min(size)
+        
+        max_wid = max(width,max_wid)
+        max_len = max(length,max_len)
+    
+    return max_len*max_wid
     
     return max_w*max_h
